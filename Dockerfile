@@ -6,10 +6,12 @@ ENV DEBIAN_FRONTEND=noninteractive
 ENV NVM_DIR=/root/.nvm
 ENV NODE_VERSION=22
 
+SHELL ["/bin/bash", "-lc"]
+
 # 3. 필수 패키지 설치 (apt update & install 묶음)
 RUN apt-get update && apt-get install -y \
+    ca-certificates \
     curl \
-    npm \
     jq \
     git \
     && rm -rf /var/lib/apt/lists/*
@@ -26,7 +28,7 @@ RUN curl -fsSL https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh |
 ENV PATH="/root/.nvm/versions/node/v${NODE_VERSION}/bin/:${PATH}"
 
 # 6. OpenClaw 글로벌 설치
-RUN npm i -g openclaw
+RUN node -v && npm -v && npm i -g openclaw
 
 # 7. 기본 작업 디렉토리 설정
 WORKDIR /workspace
