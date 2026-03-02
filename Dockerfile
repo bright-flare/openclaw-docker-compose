@@ -1,8 +1,9 @@
+# npm 설치시간 단축을 위해 node:22 이미지 사용
 FROM node:22-bookworm
 
 SHELL ["/bin/bash", "-c"]
 
-# 필수 패키지 설치 (apt update & install 묶음)
+# 필수 패키지 설치 (apt update & install 묶음), chrominum 브라우저 설치
 RUN apt-get update && apt-get install -y \
     ca-certificates \
     curl \
