@@ -1,14 +1,5 @@
 version: '3.8'
 services:
-  proxy:
-    image: nginx:latest
-    container_name: openclaw-nginx
-    ports:
-      - "80:80"
-    volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf:ro
-    networks:
-      - openclaw-net
 
   openclaw-base:
     build: .
@@ -19,13 +10,6 @@ services:
       - "$HOME/Documents/openclaw/openclaw-workspace:/workspace"
       - "$HOME/Documents/openclaw/openclaw-data:/root/.openclaw"
     working_dir: /workspace
-    expose:
-      - "18789"
-      - "18792"
-    networks:
-      - openclaw-net
+    ports:
+      - "18789:18789"
     command: bash
-
-networks:
-  openclaw-net:
-    driver: bridge
